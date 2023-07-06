@@ -1,5 +1,8 @@
 const fs = require("fs");
+const http = require("http");
 
+///////////////////////////////////////
+////FILES
 /*
 const hello = "Hello World"; //Para rodar o arquivo no terminal basta digitar nome 'arquivo.extensão' no terminal.
 console.log(hello);
@@ -16,6 +19,7 @@ console.log("File Writen");
 */
 
 //Fomra assíncrona de ler e escrever arquivos.Non Blocking.
+/*
 fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
   if (err) return console.log("ERROR!");
   fs.readFile(`./txt/${data1}.txt`, "utf-8", (err, data2) => {
@@ -30,3 +34,14 @@ fs.readFile("./txt/start.txt", "utf-8", (err, data1) => {
   });
 });
 console.log("Will read file!"); //Aqui como não depende da linha anterior, enquanto a linha 19 roda, a linha 22 irá aparecer primeiro no console e depois a linha 20, isso é o Non Blocking.
+*/
+
+///////////////////////////////////////
+////SERVER
+const server = http.createServer((req, res) => {
+  res.end("Hello from the server!");
+});
+
+server.listen(8000, "127.0.0.1", () => {
+  console.log("Listening to requests on port 8000");
+}); //Criando um servidor. Para funcionar basta rodar o arquivo index.js e no browser entrar no endereço 127.0.0.1:8000
