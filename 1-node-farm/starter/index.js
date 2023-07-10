@@ -39,6 +39,9 @@ console.log("Will read file!"); //Aqui como não depende da linha anterior, enqu
 
 ///////////////////////////////////////
 ////SERVER
+const data = fs.readFileSync(`${__dirname}/dev-data/data.json`, "utf-8");
+const dataObject = JSON.parse(data); //Aqui e na linha de cima foi criada uma API para ler o arquivo .json e conseguir usar ele em javascript.
+
 const server = http.createServer((req, res) => {
   console.log(req.url);
 
@@ -48,6 +51,11 @@ const server = http.createServer((req, res) => {
     res.end("This is the overview!");
   } else if (pathName === "/product") {
     res.end("This is the product!");
+  } else if (pathName === "/api") {
+    fs.readFile(`${__dirname}/dev-data/data.json`, "utf-8", (err, data) => {
+      res.writeHead(200, { "Content-type": "application/json" });
+      res.end(data);
+    });
   } else {
     res.writeHead(404, {
       "Content-type": "text/html",
